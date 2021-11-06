@@ -125,7 +125,15 @@ public class Maze {
 	public int[][] getMaze() {
 		return maze;
 	}
+	
+	public int getMaze(Coordinates coord) {
+		return maze[coord.i][coord.j];
+	}
 
+	public void setMaze(Coordinates coord, int val) {
+		maze[coord.i][coord.j] = val;
+	}
+	
 	public int[][] getSolvedMaze() {
 		return maze_solved;
 	}
@@ -155,8 +163,8 @@ public class Maze {
 	public BufferedImage[] generateImages() {
 		BufferedImage[] img = new BufferedImage[2];
 
-		int height = maze.length * 4;
-		int width = maze[0].length * 4;
+		int height = maze.length * 10;
+		int width = maze[0].length * 10;
 
 		img[0] = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		img[1] = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -174,12 +182,12 @@ public class Maze {
 		for (int i = 0; i < maze.length; i++) {
 			for (int j = 0; j < maze[0].length; j++) {
 				if (maze[i][j] == 1) {
-					g0.fillRect(j * 4, i * 4, 4, 4);
+					g0.fillRect(j * 10, i * 10, 10, 10);
 					if (maze_solved[i][j] == 3) {
-						g1.fillRect(j * 4, i * 4, 4, 4);
+						g1.fillRect(j * 10, i * 10, 10, 10);
 					} else {
 						g1.setColor(Color.white);
-						g1.fillRect(j * 4, i * 4, 4, 4);
+						g1.fillRect(j * 10, i * 10, 10, 10);
 						g1.setColor(Color.red);
 					}
 				}
@@ -193,6 +201,24 @@ public class Maze {
 		return img;
 	}
 
+	public void paintPath(Coordinates coord) {
+		
+		Graphics2D g = mazeImg.createGraphics();
+		g.setColor(Color.red);
+		g.fillRect(coord.j*10, coord.i*10, 10, 10);
+		g.dispose();
+		
+	}
+	
+public void erasePath(Coordinates coord) {
+		
+		Graphics2D g = mazeImg.createGraphics();
+		g.setColor(Color.white);
+		g.fillRect(coord.j*10, coord.i*10, 10, 10);
+		g.dispose();
+		
+	}
+	
 	/**
 	 * Calculates how many cells surround a wall
 	 * 

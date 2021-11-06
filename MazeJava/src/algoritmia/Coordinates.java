@@ -2,8 +2,8 @@ package algoritmia;
 
 public class Coordinates {
 
-	int i;
-	int j;
+	public int i;
+	public int j;
 
 	public Coordinates(int i, int j) {
 		this.i = i;
